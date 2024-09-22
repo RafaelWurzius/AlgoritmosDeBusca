@@ -4,7 +4,7 @@ class Grafo:
     def __init__(self):
         self.grafo = {}
 
-    # Adicionar aresta com um custo entre dois nós (direcionada ou não direcionada)
+    # Adicionar aresta com um custo entre dois nós
     def adicionar_aresta(self, origem, destino, custo):
         if origem not in self.grafo:
             self.grafo[origem] = []
@@ -19,7 +19,7 @@ class Grafo:
 
     # Busca A* até o destino
     def busca_a_estrela(self, inicio, destino, heuristica):
-        # Usamos uma fila de prioridade para armazenar os nós de acordo com o custo f(n) = g(n) + h(n)
+        # Fila de prioridade para armazenar os nós de acordo com o custo f(n) = g(n) + h(n)
         fila_prioridade = []
         visitados = set()
         custos = {inicio: 0}  # g(n): custo do caminho do nó inicial até o nó atual
@@ -32,7 +32,7 @@ class Grafo:
             # Remove o nó com menor f(n) = g(n) + h(n)
             _, no_atual = heapq.heappop(fila_prioridade)
 
-            # Se o nó de destino for encontrado, reconstruímos o caminho
+            # Se o nó de destino for encontrado, reconstrói o caminho
             if no_atual == destino:
                 caminho = []
                 while no_atual is not None:
@@ -63,19 +63,10 @@ class Grafo:
 
         print("\nNó de destino não encontrado no grafo.")
 
-# Exemplo de uso
 if __name__ == "__main__":
     g = Grafo()
 
     # Adicionar arestas com custos
-    # g.adicionar_aresta('A', 'B', 1)
-    # g.adicionar_aresta('A', 'C', 4)
-    # g.adicionar_aresta('B', 'D', 2)
-    # g.adicionar_aresta('C', 'D', 1)
-    # g.adicionar_aresta('C', 'E', 3)
-    # g.adicionar_aresta('D', 'F', 1)
-    # g.adicionar_aresta('E', 'F', 5)
-
     g.adicionar_aresta('A', 'C', 1)
 
     g.adicionar_aresta('C', 'A', 1)
@@ -147,7 +138,7 @@ if __name__ == "__main__":
     g.adicionar_aresta('R', 'Q', 2)
     g.adicionar_aresta('R', 'S', 1)   
 
-    # Definir a heurística (estimativa de distância até o nó destino 'F')
+    # Definição da heurística (quantidade de salas até o destino 'M')
     heuristica = {
         'A': 5,
         'B': 5,
@@ -172,11 +163,9 @@ if __name__ == "__main__":
         'U': 3
     }
 
-    # Imprimir o grafo
     print("Estrutura do Grafo:")
     g.imprimir_grafo()
 
-    # Realizar a busca A* até encontrar o nó de destino
     destino = 'M'
     print(f"\nBusca A* a partir do nó A até o nó {destino}:")
     g.busca_a_estrela('A', destino, heuristica)

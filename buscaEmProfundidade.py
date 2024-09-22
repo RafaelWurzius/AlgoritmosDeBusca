@@ -2,7 +2,7 @@ class Grafo:
     def __init__(self):
         self.grafo = {}
 
-    # Adicionar aresta entre dois nós (direcionada ou não direcionada)
+    # Adicionar aresta entre dois nós
     def adicionar_aresta(self, origem, destino):
         if origem not in self.grafo:
             self.grafo[origem] = []
@@ -22,7 +22,7 @@ class Grafo:
 
         # Marcar o nó atual como visitado
         visitados.add(inicio)
-        print(inicio, end=" ")  # Processa o nó (neste caso, apenas imprime)
+        print(inicio, end=" ")  # Printa o nó
 
         # Se o nó atual for o nó de destino, interrompemos a busca
         if inicio == destino:
@@ -41,7 +41,7 @@ class Grafo:
 if __name__ == "__main__":
     g = Grafo()
 
-    # Adicionar algumas arestas
+    # Adicionar algumas
     g.adicionar_aresta('A', 'C')
 
     g.adicionar_aresta('C', 'A')
@@ -113,12 +113,9 @@ if __name__ == "__main__":
     g.adicionar_aresta('R', 'Q')
     g.adicionar_aresta('R', 'S')
 
-
-    # Imprimir o grafo
     print("Estrutura do Grafo:")
     g.imprimir_grafo()
 
-    # Realizar a busca em profundidade até encontrar o nó de destino
     destino = 'E'
     print(f"\nBusca em Profundidade a partir do nó A até o nó {destino}:")
     if not g.busca_profundidade_ate_destino('A', destino):

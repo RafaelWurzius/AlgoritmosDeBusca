@@ -4,7 +4,7 @@ class Grafo:
     def __init__(self):
         self.grafo = {}
 
-    # Adicionar aresta entre dois nós (direcionada ou não direcionada)
+    # Adicionar aresta entre dois nós
     def adicionar_aresta(self, origem, destino):
         if origem not in self.grafo:
             self.grafo[origem] = []
@@ -17,9 +17,9 @@ class Grafo:
         for no in self.grafo:
             print(f"{no} -> {self.grafo[no]}")
 
-    # Busca Gulosa (Greedy) até o destino com base em uma heurística
+    # Busca Gulosa (Greedy) até o destino, com base em uma heurística
     def busca_gulosa_ate_destino(self, inicio, destino, heuristica):
-        # Usamos uma fila de prioridade para armazenar os nós de acordo com a heurística
+        # Fila de prioridade para armazenar os nós de acordo com a heurística
         fila_prioridade = []
         visitados = set()
 
@@ -29,10 +29,10 @@ class Grafo:
         while fila_prioridade:
             _, no_atual = heapq.heappop(fila_prioridade)  # Remove o nó com menor valor heurístico
 
-            # Processa o nó atual
+            # Printa o nó atual
             print(no_atual, end=" ")
 
-            # Se o nó de destino for encontrado, interrompemos a busca
+            # Se o nó de destino for encontrado, interrompe a busca
             if no_atual == destino:
                 print("\nNó de destino encontrado:", destino)
                 return
@@ -46,11 +46,10 @@ class Grafo:
 
         print("\nNó de destino não encontrado no grafo.")
 
-# Exemplo de uso
 if __name__ == "__main__":
     g = Grafo()
 
-    # Adicionar algumas arestas
+    # Adicionar arestas
     g.adicionar_aresta('A', 'C')
 
     g.adicionar_aresta('C', 'A')
@@ -122,7 +121,7 @@ if __name__ == "__main__":
     g.adicionar_aresta('R', 'Q')
     g.adicionar_aresta('R', 'S')
 
-    # Definir a heurística (estimativa de distância até o nó destino 'M')
+    # Definição da heurística (quantidade de salas até o destino 'M')
     heuristica = {
         'A': 5,
         'B': 5,
@@ -147,11 +146,10 @@ if __name__ == "__main__":
         'U': 3
     }
 
-    # Imprimir o grafo
     print("Estrutura do Grafo:")
     g.imprimir_grafo()
 
-    # Realizar a busca gulosa até encontrar o nó de destino
+    inicio = 'A'
     destino = 'M'
-    print(f"\nBusca Gulosa a partir do nó A até o nó {destino}:")
-    g.busca_gulosa_ate_destino('A', destino, heuristica)
+    print(f"\nBusca Gulosa a partir do nó {inicio} até o nó {destino}:")
+    g.busca_gulosa_ate_destino(inicio, destino, heuristica)
